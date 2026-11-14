@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<base href="/sqlsaturday-2026/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Da inovação à resiliência — SQL Saturday 17.10.2026 — Fernando Carlini Guimarães</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<div id="stage">
+<div id="counter"></div>
+<div id="progress"></div>
+
+<!-- ============================================================ 01 · HERO -->
+<section class="slide hero twilight" data-title="Abertura" data-time="0:45">
+  <div class="hero-grid">
+    <div>
+      <div class="display l1">Da inovação</div>
+      <div class="l2">à resiliência:</div>
+      <div class="display l3">a revolução dos dados durante<br>as crises da enchente</div>
+    </div>
+    <div class="card boarding">
+      <div class="label dim">Boarding pass · case</div>
+      <div class="route">
+        <div><div class="k">Origem</div><div class="code">PIX</div></div>
+        <div class="arrow"></div>
+        <div class="right"><div class="k">Destino</div><div class="code">AÇÃO</div></div>
+      </div>
+      <div class="hair"></div>
+      <div class="row">
+        <div><div class="k">Passageiro</div><div class="v"><a class="lk" href="https://www.linkedin.com/in/fernando-carlini-guimaraes/" target="_blank" rel="noopener">Fernando Carlini Guimarães</a></div></div>
+        <div><div class="k">Evento</div><div class="v">SQL Saturday</div></div>
+        <div><div class="k">Data</div><div class="v">17.10.2026</div></div>
+        <div><div class="k">Duração</div><div class="v">30 min + Q&amp;A</div></div>
+      </div>
+      <div class="barcode"></div>
+    </div>
+  </div>
+  <div class="coord-footer">
+    <div><span class="plus">+</span>Geolocalização transacional · Resposta a desastres</div>
+    <div>30.0346° S, 51.2177° W &nbsp;♡</div>
+  </div>
+</section>
+
+<!-- ============================================================ 02 · QUEM -->
+<section class="slide glow-corner" data-title="Quem fez o quê" data-time="0:45">
+  <div class="kicker">00 · Créditos antes de tudo</div>
+  <div class="h-lg" style="max-width:1400px">Esse case tem <em class="serif lav">dois autores</em>. E um time inteiro atrás.</div>
+  <div class="grid2 mt96">
+    <div class="card">
+      <div class="label dim">Modelagem geoespacial</div>
+      <div class="h-sm mt16"><a class="lk" href="https://www.linkedin.com/in/gunnar-guilherme/" target="_blank" rel="noopener">Gunnar Guilherme Mayer</a></div>
+      <div class="body-sm mt16">Data Scientist que liderou o desenvolvimento e a implementação do modelo. Foi ele quem viu que o dado de segurança servia pra outra coisa.</div>
+    </div>
+    <div class="card">
+      <div class="label dim">Produto de dados &amp; adoção</div>
+      <div class="h-sm mt16"><a class="lk" href="https://www.linkedin.com/in/fernando-carlini-guimaraes/" target="_blank" rel="noopener">Fernando Carlini Guimarães</a></div>
+      <div class="body-sm mt16">Coordenador de Dados &amp; Analytics de Canais. Framing do problema, requisitos, priorização e o caminho até as áreas que usaram o dado.</div>
+    </div>
+  </div>
+  <div class="note-line mt48">Engenharia de dados, segurança, crédito, atendimento e as cooperativas fizeram o resto. Case publicado em <b>medium.com/@fernandocarliniguimaraes</b></div>
+</section>
+
+<!-- ============================================================ 03 · MAIO 2024 -->
+<section class="slide section twilight" data-title="Maio de 2024" data-time="1:15">
+  <div class="stamp">Maio · 2024</div>
+  <div class="sub">
+    <div class="h-md">A água entrou em casa. Na minha também.</div>
+    <div class="body mt32" style="max-width:1150px">Uma segunda-feira, a empresa inteira para tudo que não fosse ajudar o Rio Grande do Sul. E no meio daquele caos chega uma mensagem num grupo de WhatsApp: <em class="serif lav">"a gente teve uma ideia"</em>.</div>
+  </div>
+</section>
+
+<!-- ============================================================ 04 · A PERGUNTA -->
+<section class="slide center-v" data-title="A pergunta óbvia" data-time="1:00">
+  <div class="kicker">01 · O problema</div>
+  <div class="label dim">Uma pergunta que parecia óbvia</div>
+  <div class="display mt32" style="font-size:150px; line-height:0.95">Onde estão os nossos<br>associados afetados?</div>
+  <div class="body mt64" style="max-width:1200px">Quem são. Onde estão. Qual o nível da água na casa deles. E na agência mais perto da casa deles.</div>
+</section>
+
+<!-- ============================================================ 05 · CADASTRO ≠ VIDA -->
+<section class="slide" data-title="Endereço ≠ geografia da vida" data-time="1:15">
+  <div class="kicker">01 · O problema</div>
+  <div class="grid-6-4 fill" style="align-items:center">
+    <div>
+      <div class="h-lg">O endereço cadastral<br>conta <em class="serif lav">um</em> lugar.</div>
+      <div class="body mt32" style="max-width:900px">A vida da pessoa acontece em vários. E o cadastro envelhece: a gente muda de bairro, de cidade, de estado, e o banco é o último a saber.</div>
+      <div class="note-line mt48">Exemplo real: o meu cadastro ainda aponta pra cidade onde eu morava quando me associei.</div>
+    </div>
+    <div class="rows">
+      <div class="r"><div class="n">01</div><div class="x">A casa onde mora</div></div>
+      <div class="r"><div class="n">02</div><div class="x">A casa dos pais</div></div>
+      <div class="r"><div class="n">03</div><div class="x">O trabalho</div></div>
+      <div class="r"><div class="n">04</div><div class="x">O negócio próprio</div></div>
+      <div class="r"><div class="n">05</div><div class="x">A propriedade rural</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 06 · O DADO QUE JÁ EXISTIA -->
+<section class="slide glow-corner" data-title="O dado que já existia" data-time="1:15">
+  <div class="kicker">02 · O insight</div>
+  <div class="grid2 fill" style="align-items:center">
+    <div>
+      <div class="label dim">O dado já existia</div>
+      <div class="h-lg mt24">Geolocalização das transações <em class="serif lav">PIX</em></div>
+      <div class="body mt32">Quando o associado permite a localização no app, a transação carrega latitude e longitude. O dado nasceu pra <b style="font-weight:400">segurança e prevenção a fraude</b>.</div>
+    </div>
+    <div class="card" style="padding:56px">
+      <div class="body-sm">A pergunta nova:</div>
+      <div class="display mt24" style="font-size:76px; line-height:1">O mesmo dado mostra onde a pessoa <span class="lav">vive</span> a vida?</div>
+      <div class="hair mt48"></div>
+      <div class="body-sm mt24">As pessoas transacionam repetidamente em volta dos lugares que importam pra elas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 07 · CARIMBO TÉCNICO -->
+<section class="slide section" data-title="Como funciona (abertura técnica)" data-time="0:15">
+  <div class="stamp">Como funciona</div>
+  <div class="sub">
+    <div class="h-md">Quinze minutos de mão na massa.</div>
+    <div class="body mt24">Tudo o que vocês vão ver rodando aqui é um <em class="serif lav">associado fictício</em>, com dados sintéticos. Nenhum ponto é de uma pessoa real.</div>
+  </div>
+</section>
+
+<!-- ============================================================ 08 · PIPELINE -->
+<section class="slide center-v" data-title="Pipeline em 4 paradas" data-time="1:00">
+  <div class="kicker">03 · Arquitetura</div>
+  <div class="h-lg">Quatro paradas, <em class="serif lav">da transação ao mapa</em>.</div>
+  <div class="routeline">
+    <div class="stop"><div class="num">01</div><div class="t">Filtro geográfico</div><div class="d">A transação aconteceu dentro do RS? Ponto-em-polígono contra o contorno do estado. Corta o volume antes de tudo.</div></div>
+    <div class="stop hot"><div class="num">02</div><div class="t">Clusters por pessoa</div><div class="d">DBSCAN no histórico de cada associado. Milhares de submodelos, um por pessoa.</div></div>
+    <div class="stop"><div class="num">03</div><div class="t">Centros de gravidade</div><div class="d">Cada cluster vira um centroide, com o peso de quantas transações ele concentra.</div></div>
+    <div class="stop"><div class="num">04</div><div class="t">Interseção com a mancha</div><div class="d">Centroide dentro dos polígonos de inundação publicados pela UFRGS? Associado potencialmente afetado.</div></div>
+  </div>
+  <div class="note-line mt64">Databricks · Python · PySpark · DBSCAN · MLflow · Google Maps API · polígonos de inundação da UFRGS</div>
+</section>
+
+<!-- ============================================================ 09 · DEMO 1: K-MEANS × DBSCAN -->
+<section class="slide" data-title="Demo 1 · Como agrupar?" data-time="1:30">
+  <div class="kicker">04 · Demo · Uma pessoa, um ano de transações</div>
+  <div class="h-md">Quantos lugares importam pra essa pessoa?</div>
+  <div class="demo">
+    <div class="canvas-wrap"><canvas id="cv-compare"></canvas><div class="cap">Associado fictício · 12 meses · dados sintéticos</div></div>
+    <div class="panel">
+      <div class="group">
+        <div class="label dim">Ver como</div>
+        <div class="seg" data-ctl="mode">
+          <button class="btn on" data-v="raw">Só os pontos</button>
+          <button class="btn" data-v="kmeans">k-means</button>
+          <button class="btn" data-v="dbscan">DBSCAN</button>
+        </div>
+      </div>
+      <div class="group slider" data-ctl="k">
+        <div class="name">k (clusters fixos)</div><div class="val">2</div>
+        <input type="range" min="1" max="6" step="1" value="2">
+      </div>
+      <div class="stats">
+        <div><div class="k">Pontos</div><div class="v" data-out="n">—</div></div>
+        <div><div class="k">Grupos</div><div class="v" data-out="groups">—</div></div>
+        <div><div class="k">Ruído</div><div class="v" data-out="noise">—</div></div>
+        <div><div class="k">Precisa de k?</div><div class="v" data-out="needk">—</div></div>
+      </div>
+      <div class="note-line" data-out="msg">Cada ponto é uma transação com geolocalização.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 10 · DBSCAN EM 3 REGRAS -->
+<section class="slide" data-title="DBSCAN em três regras" data-time="1:00">
+  <div class="kicker">05 · O algoritmo</div>
+  <div class="grid-6-4 fill" style="align-items:center">
+    <div>
+      <div class="label dim">Density-Based Spatial Clustering of Applications with Noise</div>
+      <div class="h-lg mt24">Dois parâmetros.<br><em class="serif lav">Três tipos de ponto.</em></div>
+      <div class="rows mt48">
+        <div class="r"><div class="n">ε</div><div class="x">Raio da vizinhança<small>"quão perto" é perto. Aqui, em metros (distância haversine na esfera).</small></div></div>
+        <div class="r"><div class="n">minPts</div><div class="x">Mínimo de vizinhos<small>quantas transações dentro de ε fazem um lugar ser "denso".</small></div></div>
+      </div>
+    </div>
+    <div class="card bare" style="padding:0">
+      <svg viewBox="0 0 620 620" width="100%" aria-label="Diagrama: núcleo, borda e ruído">
+        <circle cx="250" cy="300" r="150" fill="none" stroke="rgba(247,249,250,.35)" stroke-dasharray="4 6"/>
+        <circle cx="250" cy="300" r="150" fill="rgba(175,80,255,.10)"/>
+        <line x1="250" y1="300" x2="400" y2="300" stroke="rgba(247,249,250,.5)"/>
+        <text x="310" y="290" fill="#828384" font-family="JetBrains Mono, Consolas" font-size="18">ε</text>
+        <g fill="#af50ff">
+          <circle cx="250" cy="300" r="13"/><circle cx="200" cy="250" r="9"/><circle cx="300" cy="230" r="9"/>
+          <circle cx="190" cy="350" r="9"/><circle cx="290" cy="370" r="9"/>
+        </g>
+        <circle cx="430" cy="210" r="9" fill="#e1bdff"/>
+        <circle cx="540" cy="520" r="9" fill="none" stroke="#6b6b6b" stroke-width="2"/>
+        <line x1="533" y1="513" x2="547" y2="527" stroke="#6b6b6b" stroke-width="2"/>
+        <text x="40" y="530" fill="#f7f9fa" font-family="Inter, Segoe UI" font-size="22">● núcleo: ≥ minPts vizinhos em ε</text>
+        <text x="40" y="562" fill="#e1bdff" font-family="Inter, Segoe UI" font-size="22">● borda: perto de um núcleo,<tspan x="62" dy="30">mas sem densidade própria</tspan></text>
+        <text x="40" y="60" fill="#828384" font-family="Inter, Segoe UI" font-size="22">○ ruído: longe de todo mundo (a viagem de férias)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 11 · DEMO 2: PASSO A PASSO -->
+<section class="slide" data-title="Demo 2 · DBSCAN passo a passo" data-time="2:30">
+  <div class="kicker">06 · Demo · DBSCAN rodando</div>
+  <div class="h-md">Mexam no raio. <em class="serif lav">Vejam o que acontece.</em></div>
+  <div class="demo">
+    <div class="canvas-wrap"><canvas id="cv-step"></canvas><div class="cap">ε em metros · associado fictício</div></div>
+    <div class="panel">
+      <div class="group slider" data-ctl="eps">
+        <div class="name">ε · raio</div><div class="val">120 m</div>
+        <input type="range" min="10" max="900" step="10" value="120">
+      </div>
+      <div class="group slider" data-ctl="minpts">
+        <div class="name">minPts</div><div class="val">5</div>
+        <input type="range" min="2" max="15" step="1" value="5">
+      </div>
+      <div class="seg">
+        <button class="btn go" data-act="play">▶ Animar</button>
+        <button class="btn" data-act="step">Passo</button>
+        <button class="btn" data-act="finish">Resultado</button>
+        <button class="btn" data-act="reset">↺</button>
+      </div>
+      <div class="stats">
+        <div><div class="k">Clusters</div><div class="v" data-out="clusters">—</div></div>
+        <div><div class="k">Ruído</div><div class="v" data-out="noise">—</div></div>
+        <div><div class="k">Núcleos</div><div class="v" data-out="core">—</div></div>
+        <div><div class="k">Bordas</div><div class="v" data-out="border">—</div></div>
+      </div>
+      <div class="note-line" data-out="msg">Aperte ▶ pra ver o algoritmo visitando ponto por ponto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 12 · POR QUE DBSCAN -->
+<section class="slide" data-title="Por que DBSCAN (e onde ele sofre)" data-time="0:45">
+  <div class="kicker">07 · Escolha do algoritmo</div>
+  <div style="margin-top:20px">
+    <div class="grid2">
+      <div class="label dim">Por que ele</div>
+      <div class="label dim">Onde ele sofre</div>
+    </div>
+    <div class="rows pair mt24">
+      <div class="r"><div class="n">01</div><div class="x">Não precisa saber k<small>uma pessoa tem 1 lugar, outra tem 4.</small></div></div>
+      <div class="r"><div class="n">02</div><div class="x">Tem conceito de ruído<small>a viagem não vira um "centro de gravidade".</small></div></div>
+      <div class="r"><div class="n">03</div><div class="x">Aceita qualquer forma<small>e qualquer métrica, inclusive haversine.</small></div></div>
+      <div class="r"><div class="n">01</div><div class="x">Um ε pra densidades diferentes<small>cidade densa e zona rural pedem raios diferentes.</small></div></div>
+      <div class="r"><div class="n">02</div><div class="x">Memória em dado muito denso<small>e GPS de quem paga conta em casa é o dado mais denso que existe.</small></div></div>
+      <div class="r"><div class="n">03</div><div class="x">Não escala "de graça"<small>o próximo bloco é sobre isso.</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 13 · DEMO 3: CENTROIDES -->
+<section class="slide" data-title="Demo 3 · Centros de gravidade" data-time="1:00">
+  <div class="kicker">08 · Demo · Do cluster ao centro de gravidade</div>
+  <div class="h-md">Cada cluster vira <em class="serif lav">um ponto e um peso</em>.</div>
+  <div class="demo">
+    <div class="canvas-wrap"><canvas id="cv-centroid"></canvas><div class="cap">× = centroide (média das coordenadas do cluster)</div></div>
+    <div class="panel">
+      <table class="tbl" data-out="table"></table>
+      <div class="note-line">O centroide <b>não é</b> "onde a pessoa mora". É onde o comportamento dela se concentra, de forma recorrente.</div>
+      <div class="note-line">No caso real, a entrevista com associados confirmou o padrão: a casa, a casa dos pais, o comércio do bairro.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 14 · DEMO 4: MANCHA -->
+<section class="slide" data-title="Demo 4 · Interseção com a mancha" data-time="1:30">
+  <div class="kicker">09 · Demo · Ponto-em-polígono</div>
+  <div class="h-md">Cadastro × comportamento, <em class="serif lav">contra a mancha</em>.</div>
+  <div class="demo">
+    <div class="canvas-wrap"><canvas id="cv-flood"></canvas><div class="cap">Clique em qualquer lugar do mapa para testar</div></div>
+    <div class="panel">
+      <div class="group">
+        <div class="label dim">Procurar o associado por</div>
+        <div class="seg" data-ctl="source">
+          <button class="btn on" data-v="address">Endereço cadastral</button>
+          <button class="btn" data-v="centroids">Centros de gravidade</button>
+        </div>
+      </div>
+      <div class="stats">
+        <div><div class="k">Na mancha?</div><div class="v" data-out="hit">—</div></div>
+        <div><div class="k">Cruzamentos</div><div class="v" data-out="cross">—</div></div>
+      </div>
+      <div class="note-line" data-out="msg"></div>
+      <div class="note-line"><b>Ray casting:</b> solta um raio do ponto pra direita e conta quantas bordas do polígono ele cruza. Ímpar = dentro. Par = fora.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 15 · CARIMBO ESCALA -->
+<section class="slide section twilight" data-title="O problema de escala" data-time="0:15">
+  <div class="stamp">Escala</div>
+  <div class="sub">
+    <div class="h-md">Rodar DBSCAN numa pessoa é fácil.</div>
+    <div class="body mt24">Rodar em <em class="serif lav">milhares de pessoas e milhões de transações por mês</em>, numa semana, durante uma enchente, não é.</div>
+  </div>
+</section>
+
+<!-- ============================================================ 16 · DEMO 5: CALCULADORA -->
+<section class="slide" data-title="Demo 5 · A conta que não fecha" data-time="1:30">
+  <div class="kicker">10 · Demo · A conta da memória</div>
+  <div class="h-md">Por que não rodar <em class="serif lav">um DBSCAN só</em> pra todo mundo?</div>
+  <div class="calc">
+    <div>
+      <div class="group slider" data-ctl="n">
+        <div class="name">Transações no recorte</div><div class="val">10 mi</div>
+        <input type="range" min="3" max="9" step="0.1" value="7">
+      </div>
+      <div class="group slider mt24" data-ctl="m">
+        <div class="name">Transações por associado (média)</div><div class="val">200</div>
+        <input type="range" min="1" max="3.5" step="0.05" value="2.3">
+      </div>
+      <div class="group slider mt24" data-ctl="ram">
+        <div class="name">RAM do nó</div><div class="val">256 GB</div>
+        <input type="range" min="5" max="10" step="1" value="8">
+      </div>
+      <div class="note-line mt32">Pior caso do DBSCAN em dado denso: cada ponto vizinho de todo mundo, ~n² pares de vizinhos guardados (8 bytes cada).</div>
+    </div>
+    <div>
+      <div class="label dim">Um DBSCAN global</div>
+      <div class="big-num mt16" data-out="global">—</div>
+      <div class="bar-track"><div class="bar-fill" data-out="gbar"></div><div class="bar-ram" data-out="gram"><span>RAM</span></div></div>
+      <div class="body-sm mt16" data-out="gmsg"></div>
+      <div class="label dim mt64">Um DBSCAN por associado</div>
+      <div class="big-num v mt16" data-out="local">—</div>
+      <div class="bar-track"><div class="bar-fill v" data-out="lbar"></div><div class="bar-ram" data-out="lram"><span>RAM</span></div></div>
+      <div class="body-sm mt16" data-out="lmsg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 17 · POR QUE NÓ ÚNICO -->
+<section class="slide glow-corner" data-title="Por que um nó só" data-time="1:00">
+  <div class="kicker">11 · Engenharia</div>
+  <div class="h-lg" style="max-width:1450px">Não tinha biblioteca pronta. <em class="serif lav">Então o time fez uma.</em></div>
+  <div class="grid2 mt64">
+    <div>
+      <div class="body">As capacidades geoespaciais do PySpark disponíveis na época não davam conta, juntas, de:</div>
+      <div class="rows mt24">
+        <div class="r"><div class="n">01</div><div class="x">escala do dado</div></div>
+        <div class="r"><div class="n">02</div><div class="x">clustering individualizado</div></div>
+        <div class="r"><div class="n">03</div><div class="x">processamento geográfico + performance</div></div>
+      </div>
+    </div>
+    <div class="card" style="padding:48px">
+      <div class="label dim">A decisão</div>
+      <div class="h-sm mt16">Uma solução própria de processamento <span class="lav">single-node</span>, dentro do Databricks que já existia.</div>
+      <div class="body-sm mt24">Em crise, reaproveitar a plataforma que tu já tem vale mais do que desenhar uma stack nova.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 18 · DEMO 6: NÚCLEOS -->
+<section class="slide" data-title="Demo 6 · Milhares de problemas pequenos" data-time="1:15">
+  <div class="kicker">12 · Demo · O padrão: dividir por pessoa e paralelizar</div>
+  <div class="h-md">Uma fila de associados. <em class="serif lav">Todos os núcleos ocupados.</em></div>
+  <div class="demo wide">
+    <div class="canvas-wrap"><canvas id="cv-cores"></canvas><div class="cap">Ilustração do padrão · cada bloco = o DBSCAN de um associado</div></div>
+    <div class="panel">
+      <div class="group slider" data-ctl="cores">
+        <div class="name">Núcleos no nó</div><div class="val">16</div>
+        <input type="range" min="1" max="32" step="1" value="16">
+      </div>
+      <div class="seg">
+        <button class="btn go" data-act="play">▶ Processar</button>
+        <button class="btn" data-act="reset">↺</button>
+      </div>
+      <div class="stats">
+        <div><div class="k">Associados</div><div class="v" data-out="done">—</div></div>
+        <div><div class="k">Tempo</div><div class="v" data-out="t">—</div></div>
+        <div><div class="k">Sequencial</div><div class="v" data-out="seq">—</div></div>
+        <div><div class="k">Speed-up</div><div class="v" data-out="speed">—</div></div>
+      </div>
+      <div class="note-line">Associados independentes = nenhuma comunicação entre tarefas. O gargalo vira <b>a maior tarefa</b> e a <b>memória de cada uma</b>, não a rede.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 19 · ALAVANCAS + CÓDIGO -->
+<section class="slide" data-title="O esqueleto do código" data-time="1:30">
+  <div class="kicker">13 · Do slide pro notebook</div>
+  <div class="grid-6-4" style="grid-template-columns: 1.25fr 1fr; gap:56px; margin-top:8px">
+    <pre class="code"><span class="c"># esqueleto ilustrativo (não é o código de produção)</span>
+<span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> sklearn.cluster <span class="k">import</span> DBSCAN
+<span class="k">from</span> joblib <span class="k">import</span> Parallel, delayed
+
+R = <span class="s">6_371_000</span>  <span class="c"># raio da Terra, em metros</span>
+
+<span class="k">def</span> lugares_do_associado(pdf, eps_m=<span class="s">120</span>, min_pts=<span class="s">5</span>):
+    xy = np.radians(pdf[[<span class="s">"lat"</span>, <span class="s">"lon"</span>]].to_numpy())
+    pdf[<span class="s">"cluster"</span>] = DBSCAN(
+        eps=eps_m / R, min_samples=min_pts,
+        metric=<span class="s">"haversine"</span>, algorithm=<span class="s">"ball_tree"</span>,
+    ).fit_predict(xy)               <span class="c"># -1 = ruído</span>
+    <span class="k">return</span> pdf
+
+<span class="c"># 1 tarefa por associado, todos os núcleos do nó</span>
+grupos = df_rs.groupby(<span class="s">"associado_id"</span>)
+partes = Parallel(n_jobs=-<span class="s">1</span>)(
+    delayed(lugares_do_associado)(g) <span class="k">for</span> _, g <span class="k">in</span> grupos)</pre>
+    <div>
+      <div class="label dim">O que faz caber num nó só</div>
+      <div class="rows mt16">
+        <div class="r" style="padding:18px 0"><div class="n">01</div><div class="x" style="font-size:26px">Filtrar antes (só o RS)<span class="tagm">case</span></div></div>
+        <div class="r" style="padding:18px 0"><div class="n">02</div><div class="x" style="font-size:26px">Particionar por associado<span class="tagm">case</span></div></div>
+        <div class="r" style="padding:18px 0"><div class="n">03</div><div class="x" style="font-size:26px">Índice espacial + haversine<span class="tagm">case</span></div></div>
+        <div class="r" style="padding:18px 0"><div class="n">04</div><div class="x" style="font-size:26px">Deduplicar coordenadas com peso<span class="tagm">case</span></div></div>
+        <div class="r" style="padding:18px 0"><div class="n">05</div><div class="x" style="font-size:26px">Paralelizar nos núcleos<span class="tagm">case</span></div></div>
+        <div class="r" style="padding:18px 0"><div class="n">06</div><div class="x" style="font-size:26px">MLflow pra rastrear parâmetros<span class="tagm">case</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 20 · CARIMBO AÇÃO -->
+<section class="slide section twilight" data-title="Do mapa à ação" data-time="0:15">
+  <div class="stamp">Do mapa à ação</div>
+  <div class="sub">
+    <div class="h-md">Modelo que não entra numa decisão é só uma análise bonita.</div>
+  </div>
+</section>
+
+<!-- ============================================================ 21 · TOKEN -->
+<section class="slide" data-title="Recuperar o acesso sem abrir a porta pro golpe" data-time="1:30">
+  <div class="kicker">14 · Uso 01 · Atendimento</div>
+  <div class="grid2 fill" style="align-items:center">
+    <div>
+      <div class="h-lg">Perdeu o celular na enchente. <em class="serif lav">A agência está debaixo d'água.</em></div>
+      <div class="body mt32">O único canal que sobrou era o telefone e o WhatsApp. E os golpistas sabiam disso.</div>
+    </div>
+    <div class="bloom">
+      <div class="label" style="color:var(--almost-white)">A decisão real</div>
+      <div class="h-sm mt24" style="font-size:40px">Como facilitar o acesso de quem foi atingido sem criar uma nova brecha de segurança?</div>
+      <div class="body-sm mt32" style="color:rgba(247,249,250,.9)">O sinal geográfico entrou na fila de reativação do token: quem tinha centro de gravidade na área atingida ganhava prioridade, com os controles de segurança mantidos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 22 · OUTROS USOS -->
+<section class="slide" data-title="O mesmo dado, outras perguntas" data-time="1:00">
+  <div class="kicker">15 · Usos 02–04</div>
+  <div class="h-lg">A capacidade ficou. <em class="serif lav">A pergunta mudou.</em></div>
+  <div class="grid3 mt64">
+    <div class="card">
+      <div class="label dim">Crédito</div>
+      <div class="h-sm mt16" style="font-size:30px">De "foi afetado?" pra "quanto a capacidade de pagar foi afetada?"</div>
+      <div class="body-sm mt16">Severidade da área como sinal pro risco de atraso de parcelas.</div>
+    </div>
+    <div class="card">
+      <div class="label dim">Reconstrução</div>
+      <div class="h-sm mt16" style="font-size:30px">Que infraestrutura importa pra onde as pessoas vivem?</div>
+      <div class="body-sm mt16">Insumo para estudos com BCG e Oliver Wyman: estradas, energia, recursos de desenvolvimento social.</div>
+    </div>
+    <div class="card">
+      <div class="label dim">Alcance</div>
+      <div class="h-sm mt16" style="font-size:30px">1.500+ acessos de 400+ pessoas</div>
+      <div class="body-sm mt16">Dashboards e relatórios analíticos consumidos pelas áreas e cooperativas, inclusive de fora do RS.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 23 · CAPACIDADE -->
+<section class="slide glow-corner" data-title="De projeto de enchente a capacidade" data-time="1:15">
+  <div class="kicker">16 · Produto</div>
+  <div class="grid-6-4 fill" style="align-items:center">
+    <div>
+      <div class="label dim">A enchente foi o primeiro caso de uso</div>
+      <div class="h-lg mt24">O produto era a <em class="serif lav">geografia comportamental</em>.</div>
+      <div class="body mt32">Os centros de gravidade foram calculados pra associados do Brasil inteiro. A próxima emergência climática não começa do zero: cruza a nova mancha com centros que já existem.</div>
+    </div>
+    <div class="card" style="padding:44px">
+      <div class="label dim">Fraude · plausibilidade geográfica</div>
+      <div class="mt32" style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:20px; letter-spacing:.08em">
+        <div>18:02<br><span class="muted">Porto Alegre</span></div>
+        <div class="right">18:20<br><span class="muted">São Paulo</span></div>
+      </div>
+      <div class="bar-track mt16"><div class="bar-fill" style="width:100%; opacity:.25"></div></div>
+      <div class="display mt32" style="font-size:72px">≈ 2.800 km/h</div>
+      <div class="body-sm mt16">~850 km em 18 minutos. Ninguém viaja assim. Distância, tempo e proximidade dos lugares habituais viram sinal de fraude.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 24 · LIÇÕES -->
+<section class="slide" data-title="Pra levar" data-time="1:45">
+  <div class="kicker">17 · Pra levar</div>
+  <div class="stamp" style="font-size:64px">Pra levar</div>
+  <div class="rows pair mt64" style="column-gap:80px">
+      <div class="r"><div class="n">01</div><div class="x">Endereço oficial não é geografia da vida.<small>Cadastro e comportamento se complementam, não competem.</small></div></div>
+      <div class="r"><div class="n">02</div><div class="x">Teu dado responde perguntas pra que ele não foi desenhado.<small>Pra quem tem startup: o log de segurança é ativo de produto.</small></div></div>
+      <div class="r"><div class="n">03</div><div class="x">O produto mais valioso pode estar escondido no 1º caso de uso.</div></div>
+      <div class="r"><div class="n">04</div><div class="x">Às vezes o problema grande são milhares de problemas pequenos.<small>Antes de escalar a máquina, olha a forma do problema.</small></div></div>
+      <div class="r"><div class="n">05</div><div class="x">Ninguém construiu essa plataforma esperando uma enchente.<small>Governança, dado padronizado e time de ciência criaram opções.</small></div></div>
+      <div class="r"><div class="n">06</div><div class="x">"O céu e a LGPD são o limite."<small>Gunnar Guilherme Mayer</small></div></div>
+  </div>
+</section>
+
+<!-- ============================================================ 25 · FECHAMENTO -->
+<section class="slide center-v twilight" data-title="Fechamento" data-time="0:45">
+  <div class="quote" style="max-width:1500px">O valor de uma plataforma de dados não está só nos casos que você planejou.</div>
+  <div class="body mt48" style="max-width:1300px">Às vezes a capacidade que tu constrói hoje vira essencial pra um problema que ainda nem existe.</div>
+  <div class="grid2 mt96" style="max-width:1300px">
+    <div><div class="label dim">LinkedIn</div><div class="h-sm mt8"><a class="lk" href="https://www.linkedin.com/in/fernando-carlini-guimaraes/" target="_blank" rel="noopener">Fernando Carlini Guimarães</a></div></div>
+    <div><div class="label dim">O case completo</div><div class="h-sm mt8"><a class="lk" href="https://medium.com/@fernandocarliniguimaraes/from-pix-transactions-to-disaster-response-127e4f9a80d0" target="_blank" rel="noopener">medium.com/@fernandocarliniguimaraes</a></div></div>
+  </div>
+  <div class="coord-footer">
+    <div><span class="plus">+</span>Obrigado, SQL Saturday</div>
+    <div>30.0346° S, 51.2177° W &nbsp;♡</div>
+  </div>
+</section>
+
+<!-- ============================================================ 26 · Q&A -->
+<section class="slide section" data-title="Q&A" data-time="10:00">
+  <div class="stamp">Perguntas</div>
+  <div class="sub"><div class="display" style="font-size:96px">e o ε de cada um.</div></div>
+</section>
+
+</div>
+<div id="help">← → navegar · P notas (janela) · N notas (embaixo) · F tela cheia · L fundo claro</div>
+<script src="demos.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
