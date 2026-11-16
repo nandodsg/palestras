@@ -32,7 +32,8 @@
     if (window.Demos) window.Demos.enter(slides[cur]);
     counter.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
     progress.style.width = ((cur + 1) / slides.length * 100) + '%';
-    history.replaceState(null, '', '#' + (cur + 1));
+    // pathname+search explícitos: na cópia pública há <base href>, e '#N' sozinho resolve contra a base e apagava ?ref=&campaign=
+    history.replaceState(null, '', location.pathname + location.search + '#' + (cur + 1));
     track();
     slideT0 = Date.now();
     renderPresenter();
